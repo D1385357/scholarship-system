@@ -3,7 +3,7 @@ name: Deploy Vue to GitHub Pages
 on:
   push:
     branches:
-      - main   # 如果你是 master 就改這裡
+      - main
 
 permissions:
   contents: write
@@ -13,28 +13,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. checkout code
       - name: Checkout
         uses: actions/checkout@v4
 
-      # 2. setup Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: npm
 
-      # 3. install dependencies
+      #進 frontend 安裝 Vue
       - name: Install dependencies
+        working-directory: frontend
         run: npm ci
 
-      # 4. build project
+      #build Vue
       - name: Build project
+        working-directory: frontend
         run: npm run build
 
-      # 5. deploy to gh-pages branch
+      #deploy dist
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./dist
+          publish_dir: frontend/dist
