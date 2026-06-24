@@ -1,42 +1,62 @@
 <template>
-  <nav>
-    <router-link to="/">首頁</router-link> |
-    <router-link to="/followed">追蹤清單</router-link>
-  </nav>
+  <div>
+    <header class="header">
+      <div class="brand">
+        🎓 校內獎學金資訊平台
+      </div>
 
-  <router-view />
+      <nav>
+        <router-link to="/">獎學金查詢</router-link>
+        <router-link to="/followed">我的追蹤</router-link>
+      </nav>
+    </header>
+
+    <main class="container">
+      <router-view />
+    </main>
+  </div>
 </template>
 
-<script setup>
-// 不需要 HelloWorld 或其他東西（已移除範例模板）
-</script>
-
-<style scoped>
-.app {
-  font-family: Arial, sans-serif;
+<style>
+body {
+  margin: 0;
+  font-family: "Microsoft JhengHei", sans-serif;
+  background: #fff;
 }
 
-/* 導覽列 */
-.nav {
-  display: flex;
-  gap: 16px;
-  padding: 12px 20px;
-  background: #1e293b;
-}
-
-/* 連結樣式 */
-.link {
+.header {
+  background: #760000;
   color: white;
-  text-decoration: none;
+
+  padding: 18px 40px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand {
+  font-size: 26px;
   font-weight: bold;
 }
 
-.link:hover {
-  color: #38bdf8;
+nav {
+  display: flex;
+  gap: 24px;
 }
 
-/* 內容區 */
+nav a {
+  color: white;
+  text-decoration: none;
+}
+
+nav a.router-link-active {
+  font-weight: bold;
+}
+
 .container {
-  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+  padding: 30px;
 }
 </style>
