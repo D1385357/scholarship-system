@@ -13,27 +13,33 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      # 1️⃣ 取得程式碼
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      # 2️⃣ 設定 Node（Vite 必須 Node 20+）
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 20
           cache: npm
 
-      #進 frontend 安裝 Vue
+      # 3️⃣ 安裝依賴（frontend）
       - name: Install dependencies
         working-directory: frontend
         run: npm ci
 
-      #build Vue
+      # 4️⃣ 建置 Vue
       - name: Build project
         working-directory: frontend
         run: npm run build
 
-      #deploy dist
-      - name: Deploy
+      # 5️⃣ 防止 Jekyll 亂掃（超重要）
+      - name: Add .nojekyll
+        run: touch frontend/dist/.nojekyll
+
+      # 6️⃣ 部署到 gh-pages
+      - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
