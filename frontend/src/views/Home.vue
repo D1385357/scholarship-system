@@ -72,12 +72,6 @@ const sortScholarships = () => {
   <div>
     <h2>🎓 獎學金查詢系統</h2>
 
-    <input v-model="keyword" placeholder="搜尋獎學金" />
-    <button @click="doSearch">搜尋</button>
-    <button @click="load">重置</button>
-
-    <hr />
-
     <div class="search-bar">
       <input
       v-model="keyword"
